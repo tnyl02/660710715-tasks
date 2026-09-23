@@ -19,3 +19,11 @@
 - ไฟล์ที่สร้างหรือแก้: `backend/app/db/models.py`, `backend/app/db/session.py`, `backend/app/db/migrations/001_init.py`, `backend/tests/conftest.py`, `specs/001-booking/tasks.md`
 - ผล test: executable schema check ผ่าน; สร้างตาราง `slots`, `bookings`, `audit_logs` และไม่พบคอลัมน์ `national_id` ใน `bookings`. `pytest` รันได้แต่ไม่พบ test (`no tests ran`, exit code 5)
 - สิ่งที่เกือบต้องเดาแต่ถามแทน: ไม่ได้เดารูปแบบหรือวิธีออกหมายเลขคิวของ `queue_no` เพราะติด Q-02; กำหนดเป็น nullable ตาม plan.md
+
+---
+
+## 2569-09-23 คำสั่ง: /implement T-12
+
+- ไฟล์ที่สร้างหรือแก้: `frontend/src/pages/SlotPicker.jsx`, `frontend/src/App.jsx`, `frontend/src/api/client.js`, `specs/001-booking/tasks.md`
+- ผล test: `npm test` ผ่าน 1 test; `npm run build` ผ่าน. มี React `act(...)` warning จาก test เดิมที่ไม่รอ async effect แต่ไม่มี test failure
+- สิ่งที่เกือบต้องเดาแต่ถามแทน: ไม่ได้เดา schema response ใหม่ ใช้สัญญา `GET /slots` ใน plan.md และให้ mock คืน `{ slots: [...] }`; ไม่แตะ Q-02 หรือ API จริง
