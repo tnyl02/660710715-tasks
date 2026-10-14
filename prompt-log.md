@@ -105,3 +105,21 @@
 - ผล `cd backend && pytest -v`: 7 passed (TC ใหม่ผ่านทั้ง 3 ตัว รวมถึง TC-BKG-01-3 หลังแก้ service.py ในรอบก่อน)
 - ผล `cd frontend && npm test`: TC-BKG-01-2.test.jsx ไม่ผ่าน (import ../pages/BookingResult.jsx ไม่เจอ) กรณี: task ยังไม่ได้ทำ (T-06 รอ Q-02) ไม่ใช่บั๊ก, setup.test.jsx ผ่าน
 - ไม่ได้แก้โค้ดของระบบ
+
+---
+
+## 2569-10-14 13.31 คำสั่ง: /verify specs/001-booking/
+
+- เครื่องมือ: Claude Code (VS Code)
+- ไฟล์ที่สร้าง: specs/001-booking/rtm.md (ยังไม่มี rtm.md เดิม) ไม่ได้แก้โค้ด test spec plan หรือ tasks
+- ผล test: backend `pytest -v` 7 passed / frontend `npm test` setup.test.jsx ผ่าน, TC-BKG-01-2.test.jsx ไม่ผ่าน (ยังไม่มี BookingResult.jsx T-06 รอ Q-02) รวม 8 ผ่าน 1 ไม่ผ่าน
+- ตารางไปข้างหน้า 15 แถว: ครบ 1 / ยังไม่ถึง 6 / รอ 0 / ช่องโหว่ 8
+- ข้อค้นพบใหม่: F-01 ถึง F-11
+  - F-01 ละเมิด IF-HIS-01 (POST /bookings รับ national_id และเขียนลง log)
+  - F-02 ละเมิด IF-IDP-01 (idp.py จำลอง เชื่อ HN ที่ส่งมา)
+  - F-03 โค้ดไม่มี FR (DELETE /bookings อยู่ใน Out of scope UC-02)
+  - F-04 เดา Q-02 (next_queue_no รูปแบบ A001 รีเซ็ตรายวัน)
+  - F-05 ตัวเลขไม่ตรง spec (DAYS_AHEAD = 14 แต่ FR-BKG-01 กำหนด 30 วัน)
+  - F-06, F-07, F-08, F-09 FR ไม่มี AC (FR-BKG-01 เนื้อหา, FR-BKG-06, NFR-SEC-01, NFR-USE-01)
+  - F-10, F-11 test อ่อน (test_AC_BKG_05 ไม่ได้ยิงพร้อมกัน, test_AC_BKG_01 ตรวจแค่ 201)
+- ช่อง "ทีมตัดสิน" ว่างทุกข้อ รอทีมยืนยัน
